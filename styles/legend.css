@@ -1,0 +1,80 @@
+/* ============================================
+   ChartKit — Legend Component
+   ============================================ */
+
+.ck-legend {
+  min-width: 140px;
+  max-width: 200px;
+  overflow-y: auto;
+}
+
+.ck-legend-bottom {
+  min-width: 100%;
+  max-width: 100%;
+}
+
+.ck-legend-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ck-legend-gap);
+}
+
+.ck-legend-bottom .ck-legend-list {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.ck-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s, background 0.2s;
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+
+.ck-legend-item:hover {
+  opacity: 0.7;
+}
+
+.ck-legend-item-active {
+  background: rgba(79, 70, 229, 0.08);
+  transform: translateX(4px);
+  opacity: 1 !important;
+}
+
+.ck-legend-dot {
+  width: var(--ck-legend-dot-size);
+  height: var(--ck-legend-dot-size);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ck-legend-label {
+  font-size: var(--ck-text-size);
+  color: var(--ck-text-color);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ck-legend-value {
+  font-size: var(--ck-value-size);
+  font-weight: var(--ck-value-weight);
+  color: var(--ck-value-color);
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .ck-legend {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .ck-legend-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}

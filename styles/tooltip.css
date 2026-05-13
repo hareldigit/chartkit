@@ -1,0 +1,26 @@
+/* ============================================
+   ChartKit — Tooltip Component
+   ============================================ */
+
+.ck-tooltip {
+  position: absolute;
+  background: var(--ck-tooltip-bg);
+  color: var(--ck-tooltip-color);
+  border-radius: var(--ck-tooltip-radius);
+  padding: 8px 12px;
+  font-size: 13px;
+  pointer-events: none;
+  z-index: 1000;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.ck-tooltip-label {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.ck-tooltip-value {
+  font-size: 15px;
+  font-weight: 600;
+}

@@ -1,0 +1,62 @@
+/* ============================================
+   ChartKit — Card Component
+   ============================================ */
+
+.ck-card {
+  background: var(--ck-card-background);
+  border-radius: var(--ck-card-radius);
+  box-shadow: var(--ck-card-shadow);
+  padding: var(--ck-card-padding);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.ck-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ck-title {
+  font-size: var(--ck-title-size);
+  font-weight: var(--ck-title-weight);
+  color: var(--ck-title-color);
+  line-height: 1.3;
+}
+
+.ck-chart-body {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+  min-height: 0;
+}
+
+.ck-rtl .ck-chart-body {
+  flex-direction: row-reverse;
+}
+
+.ck-chart-area {
+  flex: 1;
+  position: relative;
+  min-width: 0;
+  min-height: 220px;
+}
+
+@media (max-width: 480px) {
+  .ck-chart-body {
+    flex-direction: column;
+  }
+
+  .ck-rtl .ck-chart-body {
+    flex-direction: column;
+  }
+
+  .ck-card {
+    padding: 16px;
+  }
+}

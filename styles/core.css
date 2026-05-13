@@ -1,0 +1,59 @@
+/* ============================================
+   ChartKit — Core Design Tokens & Base Styles
+   ============================================ */
+
+.ck-chart {
+  /* Typography */
+  --ck-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ck-title-size: 18px;
+  --ck-title-weight: 600;
+  --ck-title-color: #1E293B;
+  --ck-text-color: #64748B;
+  --ck-text-size: 13px;
+  --ck-value-size: 15px;
+  --ck-value-weight: 600;
+  --ck-value-color: #0F172A;
+
+  /* Card */
+  --ck-card-background: #FFFFFF;
+  --ck-card-radius: 16px;
+  --ck-card-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --ck-card-padding: 20px;
+
+  /* Toggle */
+  --ck-toggle-active-bg: #4F46E5;
+  --ck-toggle-active-color: #FFFFFF;
+  --ck-toggle-inactive-bg: #F1F5F9;
+  --ck-toggle-inactive-color: #64748B;
+  --ck-toggle-radius: 8px;
+
+  /* Legend */
+  --ck-legend-dot-size: 10px;
+  --ck-legend-gap: 12px;
+
+  /* Segment */
+  --ck-segment-gap-color: #FFFFFF;
+
+  /* Tooltip */
+  --ck-tooltip-bg: #1E293B;
+  --ck-tooltip-color: #FFFFFF;
+  --ck-tooltip-radius: 8px;
+
+  /* Footer */
+  --ck-footer-color: #4F46E5;
+  --ck-footer-weight: 500;
+
+  /* Bar */
+  --ck-bar-radius: 4px;
+  --ck-bar-gap: 0.2;
+
+  /* Animation */
+  --ck-transition-duration: 300ms;
+
+  font-family: var(--ck-font-family);
+  direction: ltr;
+}
+
+.ck-chart.ck-rtl {
+  direction: rtl;
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChartKit — RTL Demo</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #F8FAFC;
+      padding: 40px 20px;
+    }
+    h1 { font-size: 28px; font-weight: 700; text-align: center; margin-bottom: 8px; }
+    .subtitle { text-align: center; color: #64748B; margin-bottom: 40px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .chart-wrapper { min-height: 380px; }
+    .direction-toggle {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .direction-toggle button {
+      padding: 8px 20px;
+      border: 2px solid #4F46E5;
+      background: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      margin: 0 4px;
+      color: #4F46E5;
+    }
+    .direction-toggle button.active {
+      background: #4F46E5;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ChartKit — RTL / LTR Support</h1>
+  <p class="subtitle">Right-to-Left &amp; Left-to-Right — Auto-detects dir attribute</p>
+
+  <div class="direction-toggle">
+    <button id="btn-ltr">LTR</button>
+    <button id="btn-rtl" class="active">RTL</button>
+  </div>
+
+  <div class="grid">
+    <div id="donut-rtl" class="chart-wrapper"></div>
+    <div id="bar-rtl" class="chart-wrapper"></div>
+  </div>
+
+  <script src="../dist/chartkit.js"></script>
+  <script>
+    var donutChart;
+    var barChart;
+
+    document.addEventListener('DOMContentLoaded', function () {
+      donutChart = ChartKit.create(document.getElementById('donut-rtl'), {
+        type: 'donut',
+        title: 'התפלגות תיק השקעות',
+        direction: 'rtl',
+        data: [
+          { id: 'stocks', label: 'מניות', value: 450000, color: '#4F46E5' },
+          { id: 'bonds', label: 'אג"ח', value: 320000, color: '#EC4899' },
+          { id: 'realestate', label: 'נדל"ן', value: 180000, color: '#10B981' },
+          { id: 'cash', label: 'מזומן', value: 95000, color: '#F59E0B' },
+        ],
+        centerContent: {
+          label: 'סה"כ תיק',
+          value: '1,045,000',
+          unit: '₪',
+        },
+        toggle: {
+          show: true,
+          options: [
+            { label: 'סכום', value: 'amount' },
+            { label: 'אחוז', value: 'percent' },
+          ],
+        },
+        legend: { position: 'right', show: true },
+      });
+
+      barChart = ChartKit.create(document.getElementById('bar-rtl'), {
+        type: 'bar',
+        title: 'הכנסות חודשיות',
+        direction: 'rtl',
+        data: [
+          { label: 'ינואר', value: 12500 },
+          { label: 'פברואר', value: 18200 },
+          { label: 'מרץ', value: 15800 },
+          { label: 'אפריל', value: 22000 },
+          { label: 'מאי', value: 19500 },
+        ],
+        legend: { position: 'bottom', show: true },
+      });
+    });
+
+    document.getElementById('btn-ltr').addEventListener('click', function () {
+      document.getElementById('btn-ltr').classList.add('active');
+      document.getElementById('btn-rtl').classList.remove('active');
+      document.documentElement.dir = 'ltr';
+      if (donutChart) donutChart.setDirection('ltr');
+      if (barChart) barChart.setDirection('ltr');
+    });
+
+    document.getElementById('btn-rtl').addEventListener('click', function () {
+      document.getElementById('btn-rtl').classList.add('active');
+      document.getElementById('btn-ltr').classList.remove('active');
+      document.documentElement.dir = 'rtl';
+      if (donutChart) donutChart.setDirection('rtl');
+      if (barChart) barChart.setDirection('rtl');
+    });
+  </script>
+
+</body>
+</html>

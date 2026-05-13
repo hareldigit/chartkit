@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChartKit — Pure JS Charting Library</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #F8FAFC;
+      padding: 40px 20px;
+      color: #0F172A;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #64748B;
+      margin-bottom: 40px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .chart-wrapper {
+      min-height: 380px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 48px 0 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ChartKit</h1>
+  <p class="subtitle">Pure JavaScript Charting · No Dependencies · SVG · RTL/LTR · Responsive</p>
+
+  <div class="section-title">Donut Charts</div>
+  <div class="grid">
+
+    <!-- Donut: data-ck-* attributes -->
+    <div class="chart-wrapper ck-chart"
+         data-ck-type="donut"
+         data-ck-title="Exposure Distribution"
+         data-ck-data='[{"id":"us","label":"US Treasury","value":120500000,"color":"#4F46E5"},{"id":"uk","label":"UK Gilts","value":98500000,"color":"#7C3AED"},{"id":"jp","label":"Japan Bonds","value":76000000,"color":"#EC4899"},{"id":"de","label":"German Bunds","value":48500000,"color":"#F59E0B"}]'
+         data-ck-center-label="Total Exposure"
+         data-ck-center-value="343.6M"
+         data-ck-center-unit="USD"
+         data-ck-show-toggle="true"
+         data-ck-toggle-options='[{"label":"Amount","value":"amount"},{"label":"Percent","value":"percent"}]'
+         data-ck-footer-label="View all 23 issuers">
+    </div>
+
+    <!-- Donut: JS API -->
+    <div id="donut-js" class="chart-wrapper"></div>
+
+  </div>
+
+  <div class="section-title">Bar Charts</div>
+  <div class="grid">
+
+    <!-- Bar chart -->
+    <div class="chart-wrapper ck-chart"
+         data-ck-type="bar"
+         data-ck-title="Monthly Revenue"
+         data-ck-data='[{"label":"Jan","value":12500},{"label":"Feb","value":18200},{"label":"Mar","value":15800},{"label":"Apr","value":22000},{"label":"May","value":19500},{"label":"Jun","value":28000}]'
+         data-ck-legend-position="bottom"
+         data-ck-show-toggle="true"
+         data-ck-toggle-options='[{"label":"Amount","value":"amount"},{"label":"Percent","value":"percent"}]'>
+    </div>
+
+    <!-- Bar chart JS API -->
+    <div id="bar-js" class="chart-wrapper"></div>
+
+  </div>
+
+  <script src="../dist/chartkit.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      ChartKit.autoInit();
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var donutEl = document.getElementById('donut-js');
+      var barEl = document.getElementById('bar-js');
+
+      if (donutEl) {
+        var donut = ChartKit.create(donutEl, {
+          type: 'donut',
+          title: 'Portfolio Allocation',
+          data: [
+            { id: 'eq', label: 'Equities', value: 450000, color: '#10B981' },
+            { id: 'fi', label: 'Fixed Income', value: 320000, color: '#3B82F6' },
+            { id: 're', label: 'Real Estate', value: 180000, color: '#F97316' },
+            { id: 'ca', label: 'Cash', value: 95000, color: '#6366F1' },
+            { id: 'co', label: 'Commodities', value: 55000, color: '#84CC16' },
+          ],
+          centerContent: {
+            label: 'Total Portfolio',
+            value: '1,100,000',
+            unit: 'USD',
+          },
+          toggle: {
+            show: true,
+            options: [
+              { label: 'Amount', value: 'amount' },
+              { label: 'Percent', value: 'percent' },
+            ],
+          },
+          legend: { position: 'right', show: true },
+          footer: { label: 'View all assets' },
+          othersThreshold: 8,
+        });
+      }
+
+      if (barEl) {
+        ChartKit.create(barEl, {
+          type: 'bar',
+          title: 'Department Budgets',
+          data: [
+            { label: 'Engineering', value: 450000, color: '#4F46E5' },
+            { label: 'Marketing', value: 280000, color: '#EC4899' },
+            { label: 'Sales', value: 350000, color: '#10B981' },
+            { label: 'Design', value: 180000, color: '#F59E0B' },
+            { label: 'Support', value: 120000, color: '#8B5CF6' },
+          ],
+          toggle: {
+            show: true,
+            options: [
+              { label: 'Amount', value: 'amount' },
+              { label: 'Percent', value: 'percent' },
+            ],
+          },
+          legend: { position: 'bottom', show: true },
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

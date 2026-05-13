@@ -1,0 +1,33 @@
+/* ============================================
+   ChartKit — Toggle Component
+   ============================================ */
+
+.ck-toggle {
+  display: inline-flex;
+  background: var(--ck-toggle-inactive-bg);
+  border-radius: var(--ck-toggle-radius);
+  padding: 3px;
+  gap: 2px;
+}
+
+.ck-toggle-btn {
+  background: none;
+  border: none;
+  padding: 6px 14px;
+  border-radius: var(--ck-toggle-radius);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--ck-toggle-inactive-color);
+  transition: all var(--ck-transition-duration);
+  white-space: nowrap;
+}
+
+.ck-toggle-btn:hover {
+  color: var(--ck-toggle-active-color);
+}
+
+.ck-toggle-active {
+  background: var(--ck-toggle-active-bg);
+  color: var(--ck-toggle-active-color) !important;
+}
