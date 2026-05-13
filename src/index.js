@@ -64,7 +64,7 @@ function getDefaultStyles() {
     + '.ck-title { font-size: var(--ck-title-size, 18px); font-weight: var(--ck-title-weight, 600); color: var(--ck-title-color, #1E293B); line-height: 1.3; }'
     + '.ck-chart-body { display: flex; gap: 20px; flex: 1; min-height: 0; }'
     + '.ck-chart-body-column { flex-direction: column; overflow: hidden; }'
-    + '.ck-chart-area { flex: 1 1 0; position: relative; min-width: 0; overflow: hidden; }'
+    + '.ck-chart-area { flex: 1 1 auto; position: relative; min-width: 0; min-height: 120px; overflow: hidden; }'
     + '.ck-rtl .ck-chart-body { flex-direction: row-reverse; }'
     + '.ck-toggle { display: inline-flex; background: var(--ck-toggle-inactive-bg, #F1F5F9); border-radius: var(--ck-toggle-radius, 8px); padding: 3px; gap: 2px; }'
     + '.ck-toggle-btn { background: none; border: none; padding: 6px 14px; border-radius: var(--ck-toggle-radius, 8px); font-size: 13px; font-weight: 500; cursor: pointer; color: var(--ck-toggle-inactive-color, #64748B); transition: all var(--ck-transition-duration, 300ms); white-space: nowrap; }'
