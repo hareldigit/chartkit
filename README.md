@@ -1,6 +1,6 @@
 # ChartKit
 
-**Pure JavaScript charting library — zero dependencies, SVG-based, fully customizable.**
+**Pure JavaScript charting library - zero dependencies, SVG-based, fully customizable.**
 
 ChartKit renders beautiful Donut, Pie, and Bar charts using vanilla JavaScript, CSS, and SVG. Designed for scenarios where a backend (e.g., Java) generates HTML elements with data attributes, or for direct programmatic use via a clean JavaScript API.
 
@@ -8,21 +8,21 @@ ChartKit renders beautiful Donut, Pie, and Bar charts using vanilla JavaScript, 
 
 ## Features
 
-- **Donut / Pie / Bar charts** — SVG-rendered, resolution-independent
-- **Dual API** — HTML data attributes (backend-generated) or JavaScript API
-- **RTL / LTR support** — Auto-detects `dir` attribute, toggle at runtime
-- **Fully customizable** — Colors, fonts, sizes, radii, gaps via CSS custom properties
-- **Responsive** — ResizeObserver-based, adapts to container size
-- **Animated** — Entry animations with configurable duration and easing
-- **Realtime updates** — `chart.updateData()` with smooth transitions
-- **Type switching** — Switch between chart types at runtime
-- **Toggle component** — Amount / Percent view toggle built-in
-- **Legend** — Positionable (right, left, bottom), auto-generated
-- **"Others" grouping** — Threshold-based grouping for small segments
-- **Tooltips** — Hover tooltips with label and formatted value
-- **Center content slot** — Custom content in donut hole
-- **Footer action** — Configurable button with click handler
-- **No dependencies** — Pure JavaScript (ES6+), no frameworks required
+- **Donut / Pie / Bar charts** - SVG-rendered, resolution-independent
+- **Dual API** - HTML data attributes (backend-generated) or JavaScript API
+- **RTL / LTR support** - Auto-detects `dir` attribute, toggle at runtime
+- **Fully customizable** - Colors, fonts, sizes, radii, gaps via CSS custom properties
+- **Responsive** - ResizeObserver-based, adapts to container size
+- **Animated** - Entry animations with configurable duration and easing
+- **Realtime updates** - `chart.updateData()` with smooth transitions
+- **Type switching** - Switch between chart types at runtime
+- **Toggle component** - Amount / Percent view toggle built-in
+- **Legend** - Positionable (right, left, bottom), auto-generated
+- **"Others" grouping** - Threshold-based grouping for small segments
+- **Tooltips** - Hover tooltips with label and formatted value
+- **Center content slot** - Custom content in donut hole
+- **Footer action** - Configurable button with click handler
+- **No dependencies** - Pure JavaScript (ES6+), no frameworks required
 
 ---
 
@@ -70,7 +70,7 @@ npm install chartkit
 
 ### HTML Attribute API
 
-The simplest approach — add `data-ck-*` attributes to any `<div>`:
+The simplest approach - add `data-ck-*` attributes to any `<div>`:
 
 ```html
 <div class="ck-chart"
@@ -376,7 +376,7 @@ ChartKit uses `ResizeObserver` to detect container size changes and re-renders a
 ## Real-Time Updates
 
 ```javascript
-// Update chart data — smooth animation
+// Update chart data - smooth animation
 setInterval(() => {
   data[0].value = Math.random() * 100;
   chart.updateData([...data]);
@@ -393,11 +393,11 @@ ChartKit follows SOLID principles:
 
 | Principle | Implementation |
 |-----------|---------------|
-| **S** — Single Responsibility | Each file has one purpose: `Chart.js` (lifecycle), `SVGRenderer.js` (drawing), `Animator.js` (animations), etc. |
-| **O** — Open/Closed | New chart types register via `ChartFactory` without modifying existing code |
-| **L** — Liskov Substitution | All chart types implement the same interface: `render()`, `updateData()`, `destroy()` |
-| **I** — Interface Segregation | Config is split into logical groups: data, visual, legend, animation, etc. |
-| **D** — Dependency Inversion | Components depend on abstractions (`Renderer`, `Animator`) not concrete implementations |
+| **S** - Single Responsibility | Each file has one purpose: `Chart.js` (lifecycle), `SVGRenderer.js` (drawing), `Animator.js` (animations), etc. |
+| **O** - Open/Closed | New chart types register via `ChartFactory` without modifying existing code |
+| **L** - Liskov Substitution | All chart types implement the same interface: `render()`, `updateData()`, `destroy()` |
+| **I** - Interface Segregation | Config is split into logical groups: data, visual, legend, animation, etc. |
+| **D** - Dependency Inversion | Components depend on abstractions (`Renderer`, `Animator`) not concrete implementations |
 
 ### File Structure
 
