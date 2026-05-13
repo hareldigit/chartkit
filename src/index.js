@@ -59,7 +59,7 @@ function getDefaultStyles() {
   return ''
     + '.ck-chart { direction: ltr; font-family: var(--ck-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif); }'
     + '.ck-chart.ck-rtl { direction: rtl; }'
-    + '.ck-card { background: var(--ck-card-background, #FFFFFF); border-radius: var(--ck-card-radius, 16px); box-shadow: var(--ck-card-shadow, 0 4px 24px rgba(0,0,0,0.08)); padding: var(--ck-card-padding, 20px); display: flex; flex-direction: column; gap: 16px; box-sizing: border-box; overflow: hidden; max-height: 100%; }'
+    + '.ck-card { background: var(--ck-card-background, #FFFFFF); border-radius: var(--ck-card-radius, 16px); box-shadow: var(--ck-card-shadow, 0 4px 24px rgba(0,0,0,0.08)); padding: var(--ck-card-padding, 20px); display: flex; flex-direction: column; gap: 16px; box-sizing: border-box; overflow: hidden; }'
     + '.ck-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }'
     + '.ck-title { font-size: var(--ck-title-size, 18px); font-weight: var(--ck-title-weight, 600); color: var(--ck-title-color, #1E293B); line-height: 1.3; }'
     + '.ck-chart-body { display: flex; gap: 20px; flex: 1; min-height: 0; }'

@@ -77,7 +77,13 @@ Chart.prototype.destroy = function destroy() {
 
 Chart.prototype._setupResize = function setupResize() {
   var self = this;
+  var pending = false;
   this._resizeObserver = createResizeObserver(this._el, function () {
-    self.render();
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(function () {
+      pending = false;
+      if (!self._isDestroyed) self.render();
+    });
   });
 };
