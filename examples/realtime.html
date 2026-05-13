@@ -77,17 +77,17 @@
     var intervalId = null;
 
     var donutBaseData = [
-      { id: 'a', label: 'Product A', value: 120 },
-      { id: 'b', label: 'Product B', value: 85 },
-      { id: 'c', label: 'Product C', value: 65 },
-      { id: 'd', label: 'Product D', value: 40 },
+      { id: 'home', label: 'Homepage', value: 120 },
+      { id: 'pricing', label: 'Pricing', value: 85 },
+      { id: 'docs', label: 'Documentation', value: 65 },
+      { id: 'blog', label: 'Blog', value: 40 },
     ];
 
     var barBaseData = [
-      { label: 'Q1', value: 150 },
-      { label: 'Q2', value: 220 },
-      { label: 'Q3', value: 180 },
-      { label: 'Q4', value: 290 },
+      { label: 'EU', value: 150 },
+      { label: 'US', value: 220 },
+      { label: 'AS', value: 180 },
+      { label: 'Other', value: 290 },
     ];
 
     function randomize(data) {
@@ -101,16 +101,16 @@
     document.addEventListener('DOMContentLoaded', function () {
       donutChart = ChartKit.create(document.getElementById('donut-realtime'), {
         type: 'donut',
-        title: 'Live Sales Distribution',
+        title: 'Live Views by Page',
         data: donutBaseData,
-        centerContent: { label: 'Total Sales', value: '310', unit: 'units' },
+        centerContent: { label: 'Total Views', value: '310', unit: 'Live' },
         toggle: { show: true, options: [{ label: 'Amount', value: 'amount' }, { label: 'Percent', value: 'percent' }] },
         legend: { position: 'right', show: true },
       });
 
       barChart = ChartKit.create(document.getElementById('bar-realtime'), {
         type: 'bar',
-        title: 'Live Quarterly Revenue',
+        title: 'Live Users by Region',
         data: barBaseData,
         legend: { position: 'bottom', show: true },
       });

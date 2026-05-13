@@ -65,24 +65,24 @@
     document.addEventListener('DOMContentLoaded', function () {
       donutChart = ChartKit.create(document.getElementById('donut-rtl'), {
         type: 'donut',
-        title: 'התפלגות תיק השקעות',
+        title: 'התפלגות גולשים',
         direction: 'rtl',
         data: [
-          { id: 'stocks', label: 'מניות', value: 450000, color: '#4F46E5' },
-          { id: 'bonds', label: 'אג"ח', value: 320000, color: '#EC4899' },
-          { id: 'realestate', label: 'נדל"ן', value: 180000, color: '#10B981' },
-          { id: 'cash', label: 'מזומן', value: 95000, color: '#F59E0B' },
+          { id: 'search', label: 'חיפוש', value: 450000, color: '#4F46E5' },
+          { id: 'social', label: 'רשתות חברתיות', value: 320000, color: '#EC4899' },
+          { id: 'direct', label: 'גלישה ישירה', value: 180000, color: '#10B981' },
+          { id: 'email', label: 'דוא"ל', value: 95000, color: '#F59E0B' },
         ],
         centerContent: {
-          label: 'סה"כ תיק',
+          label: 'סה"כ גולשים',
           value: '1,045,000',
-          unit: '₪',
+          unit: 'חודשי',
         },
         toggle: {
           show: true,
           options: [
-            { label: 'סכום', value: 'amount' },
-            { label: 'אחוז', value: 'percent' },
+            { label: 'כמות', value: 'amount' },
+            { label: 'אחוזים', value: 'percent' },
           ],
         },
         legend: { position: 'right', show: true },
@@ -90,14 +90,14 @@
 
       barChart = ChartKit.create(document.getElementById('bar-rtl'), {
         type: 'bar',
-        title: 'הכנסות חודשיות',
+        title: 'הורדות יומיות',
         direction: 'rtl',
         data: [
-          { label: 'ינואר', value: 12500 },
-          { label: 'פברואר', value: 18200 },
-          { label: 'מרץ', value: 15800 },
-          { label: 'אפריל', value: 22000 },
-          { label: 'מאי', value: 19500 },
+          { label: 'ראשון', value: 12500 },
+          { label: 'שני', value: 18200 },
+          { label: 'שלישי', value: 15800 },
+          { label: 'רביעי', value: 22000 },
+          { label: 'חמישי', value: 19500 },
         ],
         legend: { position: 'bottom', show: true },
       });
