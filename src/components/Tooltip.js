@@ -10,7 +10,14 @@ export function Tooltip() {
 }
 
 Tooltip.prototype.attachTo = function attachTo(container) {
+  this._container = container;
   container.appendChild(this._el);
+};
+
+Tooltip.prototype.reattach = function reattach() {
+  if (this._container) {
+    this._container.appendChild(this._el);
+  }
 };
 
 Tooltip.prototype.show = function show(x, y, label, value, color) {

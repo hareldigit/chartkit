@@ -72,8 +72,7 @@ BarChart.prototype.render = function render() {
   }
 
   renderer.init(width, height);
-
-  chartArea.appendChild(this._tooltip._el);
+  this._tooltip.reattach();
 
   var plotLeft = PADDING.left;
   var plotRight = width - PADDING.right;
@@ -190,8 +189,10 @@ BarChart.prototype._animateEntry = function _animateEntry(duration, maxValue, pl
   animator.cancel();
   if (!bars || bars.length === 0) return;
 
-  self._finalizeBars();
-  return;
+  if (!this._config.animation.enabled || duration <= 0) {
+    self._finalizeBars();
+    return;
+  }
 
   for (var i = 0; i < bars.length; i++) {
     bars[i].rect.setAttribute('y', bars[i].baseline);
@@ -205,17 +206,17 @@ BarChart.prototype._animateEntry = function _animateEntry(duration, maxValue, pl
     }
 
     var bar = bars[index];
-    var h = progress * bar.targetHeight;
+    if (!bar || !bar.rect) return;
 
+    var h = progress * bar.targetHeight;
     bar.rect.setAttribute('y', bar.baseline - h);
     bar.rect.setAttribute('height', Math.max(0, h).toString());
     bar.rect.setAttribute('fill', progress > 0.25 ? bar.color : lightenColor(bar.color, 40));
   });
 
-  var safety = setTimeout(function () {
+  this._animSafety = setTimeout(function () {
     self._finalizeBars();
-  }, duration + 300);
-  this._animSafety = safety;
+  }, duration + 500);
 };
 
 BarChart.prototype._finalizeBars = function _finalizeBars() {
@@ -238,12 +239,11 @@ BarChart.prototype._attachBarHover = function _attachBarHover(rect, index, item,
     rect.setAttribute('opacity', '0.85');
     rect.setAttribute('fill', lightenColor(item.color || getColor(index), 20));
 
-    var chartArea = self._card.getChartArea();
-    var chartRect = chartArea.getBoundingClientRect();
+    self._cachedRect = self._card.getChartArea().getBoundingClientRect();
 
     self._tooltip.show(
-      e.clientX - chartRect.left + 12,
-      e.clientY - chartRect.top - 40,
+      e.clientX - self._cachedRect.left + 12,
+      e.clientY - self._cachedRect.top - 40,
       item.label,
       formatValue(item.value, self._toggleMode, self._config.decimals),
       item.color || getColor(index)
@@ -266,6 +266,7 @@ BarChart.prototype._attachBarHover = function _attachBarHover(rect, index, item,
       rect.setAttribute('fill', getColor(index));
     }
     self._tooltip.hide();
+    self._cachedRect = null;
 
     if (self._bars) {
       for (var i = 0; i < self._bars.length; i++) {
@@ -277,12 +278,12 @@ BarChart.prototype._attachBarHover = function _attachBarHover(rect, index, item,
   });
 
   rect.addEventListener('mousemove', function (e) {
-    var chartArea = self._card.getChartArea();
-    var chartRect = chartArea.getBoundingClientRect();
-    self._tooltip.updatePosition(
-      e.clientX - chartRect.left + 12,
-      e.clientY - chartRect.top - 40
-    );
+    if (self._cachedRect) {
+      self._tooltip.updatePosition(
+        e.clientX - self._cachedRect.left + 12,
+        e.clientY - self._cachedRect.top - 40
+      );
+    }
   });
 };
 

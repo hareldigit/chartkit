@@ -125,7 +125,7 @@ DonutChart.prototype.render = function render() {
 
   renderer.init(width, height);
 
-  chartArea.appendChild(this._tooltip._el);
+  this._tooltip.reattach();
 
   if (this._centerContent) {
     chartArea.appendChild(this._centerContent.getElement());
@@ -289,15 +289,15 @@ DonutChart.prototype._attachSegmentHover = function _attachSegmentHover(path, in
 
   path.addEventListener('mouseenter', function (e) {
     self._hoveredIndex = index;
+    self._cachedRect = self._card.getChartArea().getBoundingClientRect();
 
     path.setAttribute('transform', 'scale(1.08)');
     path.setAttribute('opacity', '0.85');
     path.style.filter = 'drop-shadow(0 2px 6px rgba(0,0,0,0.2))';
 
-    var rect = self._card.getChartArea().getBoundingClientRect();
     self._tooltip.show(
-      e.clientX - rect.left + 12,
-      e.clientY - rect.top - 40,
+      e.clientX - self._cachedRect.left + 12,
+      e.clientY - self._cachedRect.top - 40,
       item.label,
       formatValue(item.value, self._toggleMode, self._config.decimals),
       item.color
@@ -317,6 +317,7 @@ DonutChart.prototype._attachSegmentHover = function _attachSegmentHover(path, in
 
   path.addEventListener('mouseleave', function () {
     self._hoveredIndex = -1;
+    self._cachedRect = null;
 
     path.setAttribute('transform', 'scale(1)');
     path.setAttribute('opacity', '1');
@@ -335,11 +336,10 @@ DonutChart.prototype._attachSegmentHover = function _attachSegmentHover(path, in
   });
 
   path.addEventListener('mousemove', function (e) {
-    if (self._hoveredIndex === index) {
-      var rect = self._card.getChartArea().getBoundingClientRect();
+    if (self._hoveredIndex === index && self._cachedRect) {
       self._tooltip.updatePosition(
-        e.clientX - rect.left + 12,
-        e.clientY - rect.top - 40
+        e.clientX - self._cachedRect.left + 12,
+        e.clientY - self._cachedRect.top - 40
       );
     }
   });
