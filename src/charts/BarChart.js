@@ -73,6 +73,8 @@ BarChart.prototype.render = function render() {
 
   renderer.init(width, height);
 
+  chartArea.appendChild(this._tooltip._el);
+
   var plotLeft = PADDING.left;
   var plotRight = width - PADDING.right;
   var plotTop = PADDING.top;

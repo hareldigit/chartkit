@@ -63,6 +63,38 @@ DonutChart.prototype._init = function _init() {
   }
 
   this.render();
+
+  this._setupLegendHover();
+};
+
+DonutChart.prototype._setupLegendHover = function _setupLegendHover() {
+  var self = this;
+  var legend = this._card.getLegend();
+  if (!legend) return;
+
+  var chartArea = this._card.getChartArea();
+
+  function handler(e) {
+    var detail = e.detail;
+    var segments = self._segments;
+
+    for (var i = 0; i < segments.length; i++) {
+      if (segments[i].data.id === detail.item.id) {
+        if (detail.action === 'enter') {
+          segments[i].path.setAttribute('transform', 'scale(1.08)');
+          segments[i].path.setAttribute('opacity', '0.85');
+          segments[i].path.style.filter = 'drop-shadow(0 2px 6px rgba(0,0,0,0.2))';
+        } else {
+          segments[i].path.setAttribute('transform', 'scale(1)');
+          segments[i].path.setAttribute('opacity', '1');
+          segments[i].path.style.filter = 'none';
+        }
+      }
+    }
+  }
+
+  chartArea.addEventListener('legend-hover', handler);
+  this._legendHoverHandler = handler;
 };
 
 DonutChart.prototype.render = function render() {
@@ -89,6 +121,8 @@ DonutChart.prototype.render = function render() {
   var innerRadius = outerRadius * config.innerRadius;
 
   renderer.init(width, height);
+
+  chartArea.appendChild(this._tooltip._el);
 
   if (this._centerContent) {
     chartArea.appendChild(this._centerContent.getElement());
@@ -312,26 +346,6 @@ DonutChart.prototype._updateLegend = function _updateLegend() {
 
   legend.build(this._processedData, function (item) {
     return formatValue(item.value, self._toggleMode);
-  });
-
-  var chartArea = this._card.getChartArea();
-  chartArea.addEventListener('legend-hover', function (e) {
-    var detail = e.detail;
-    var segments = self._segments;
-
-    for (var i = 0; i < segments.length; i++) {
-      if (segments[i].data.id === detail.item.id) {
-        if (detail.action === 'enter') {
-          segments[i].path.setAttribute('transform', 'scale(1.08)');
-          segments[i].path.setAttribute('opacity', '0.85');
-          segments[i].path.style.filter = 'drop-shadow(0 2px 6px rgba(0,0,0,0.2))';
-        } else {
-          segments[i].path.setAttribute('transform', 'scale(1)');
-          segments[i].path.setAttribute('opacity', '1');
-          segments[i].path.style.filter = 'none';
-        }
-      }
-    }
   });
 };
 
