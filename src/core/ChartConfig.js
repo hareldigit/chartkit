@@ -89,6 +89,9 @@ function parseHTMLConfig(el) {
   var othersThreshold = getDataAttribute(el, 'others-threshold');
   if (othersThreshold !== null) config.othersThreshold = parseInt(othersThreshold, 10);
 
+  var decimals = getDataAttribute(el, 'decimals');
+  if (decimals !== null) config.decimals = parseInt(decimals, 10);
+
   var responsive = getDataAttribute(el, 'responsive');
   if (responsive !== null) config.responsive = responsive !== 'false';
 
@@ -113,6 +116,7 @@ function mergeConfigs(htmlConfig, jsConfig) {
   mergeObjectConfig(merged, htmlConfig, jsConfig, 'footer');
   mergeObjectConfig(merged, htmlConfig, jsConfig, 'animation');
   mergePrimitiveConfig(merged, htmlConfig, jsConfig, 'othersThreshold');
+  mergePrimitiveConfig(merged, htmlConfig, jsConfig, 'decimals');
 
   return merged;
 }
@@ -150,6 +154,7 @@ function validateAndFinalize(config) {
     innerRadius: config.innerRadius !== undefined ? Math.max(0, Math.min(1, config.innerRadius)) : DEFAULT_INNER_RADIUS,
     segmentGap: config.segmentGap !== undefined ? Math.max(0, config.segmentGap) : DEFAULT_SEGMENT_GAP,
     othersThreshold: validateOthersThreshold(config.othersThreshold),
+    decimals: config.decimals !== undefined ? Math.max(0, Math.min(4, parseInt(config.decimals, 10) || 0)) : 1,
     responsive: config.responsive !== false,
     theme: config.theme || {},
   };

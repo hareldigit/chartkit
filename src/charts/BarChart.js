@@ -119,7 +119,7 @@ BarChart.prototype._drawAxes = function _drawAxes(renderer, left, right, top, bo
         'stroke-width': '1',
       });
 
-      renderer.createText(formatValue(value, TOGGLE_MODE.AMOUNT), left - 10, y + 4, {
+      renderer.createText(formatValue(value, TOGGLE_MODE.AMOUNT, this._config.decimals), left - 10, y + 4, {
         fill: LABEL_COLOR,
         'font-size': '11px',
         'text-anchor': 'end',
@@ -245,7 +245,7 @@ BarChart.prototype._attachBarHover = function _attachBarHover(rect, index, item,
       e.clientX - chartRect.left + 12,
       e.clientY - chartRect.top - 40,
       item.label,
-      formatValue(item.value, self._toggleMode),
+      formatValue(item.value, self._toggleMode, self._config.decimals),
       item.color || getColor(index)
     );
 
@@ -293,7 +293,7 @@ BarChart.prototype._updateLegend = function _updateLegend() {
   var self = this;
 
   legend.build(this._config.data, function (item) {
-    return formatValue(item.value, self._toggleMode);
+    return formatValue(item.value, self._toggleMode, self._config.decimals);
   });
 };
 

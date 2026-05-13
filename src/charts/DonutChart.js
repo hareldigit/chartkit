@@ -299,7 +299,7 @@ DonutChart.prototype._attachSegmentHover = function _attachSegmentHover(path, in
       e.clientX - rect.left + 12,
       e.clientY - rect.top - 40,
       item.label,
-      formatValue(item.value, self._toggleMode),
+      formatValue(item.value, self._toggleMode, self._config.decimals),
       item.color
     );
 
@@ -352,7 +352,7 @@ DonutChart.prototype._updateLegend = function _updateLegend() {
   var self = this;
 
   legend.build(this._processedData, function (item) {
-    return formatValue(item.value, self._toggleMode);
+    return formatValue(item.value, self._toggleMode, self._config.decimals);
   });
 };
 
@@ -383,7 +383,7 @@ DonutChart.prototype.updateData = function updateData(newData) {
     var total = calculateTotal(newData);
     this._centerContent.update({
       label: this._config.centerContent.label,
-      value: formatValue(total, TOGGLE_MODE.AMOUNT),
+      value: formatValue(total, TOGGLE_MODE.AMOUNT, this._config.decimals),
       unit: this._config.centerContent.unit,
     });
   }

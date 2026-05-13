@@ -66,7 +66,7 @@ function getDefaultStyles() {
     + '.ck-chart-body-column { flex-direction: column; overflow: hidden; }'
     + '.ck-chart-area { flex: 1 1 auto; position: relative; min-width: 0; min-height: 120px; overflow: hidden; }'
     + '.ck-rtl .ck-chart-body { flex-direction: row-reverse; }'
-    + '.ck-toggle { display: inline-flex; background: var(--ck-toggle-inactive-bg, #F1F5F9); border-radius: var(--ck-toggle-radius, 8px); padding: 3px; gap: 2px; }'
+    + '.ck-toggle { display: inline-flex; background: var(--ck-toggle-inactive-bg, #F1F5F9); border-radius: var(--ck-toggle-radius, 8px); padding: 3px; gap: 2px; direction: ltr; }'
     + '.ck-toggle-btn { background: none; border: none; padding: 6px 14px; border-radius: var(--ck-toggle-radius, 8px); font-size: 13px; font-weight: 500; cursor: pointer; color: var(--ck-toggle-inactive-color, #64748B); transition: all var(--ck-transition-duration, 300ms); white-space: nowrap; }'
     + '.ck-toggle-btn:hover { color: var(--ck-toggle-active-color, #FFFFFF); }'
     + '.ck-toggle-active { background: var(--ck-toggle-active-bg, #4F46E5); color: var(--ck-toggle-active-color, #FFFFFF) !important; }'

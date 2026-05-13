@@ -55,21 +55,22 @@ export function calculateTotal(data) {
   return data.reduce(function (sum, item) { return sum + item.value; }, 0);
 }
 
-export function formatValue(value, format) {
+export function formatValue(value, format, decimals) {
+  var d = decimals !== undefined ? decimals : 1;
   if (format === 'percent') {
-    return value.toFixed(1) + '%';
+    return value.toFixed(d) + '%';
   }
 
   if (value >= 1000000000) {
-    return (value / 1000000000).toFixed(1) + 'B';
+    return (value / 1000000000).toFixed(d) + 'B';
   }
   if (value >= 1000000) {
-    return (value / 1000000).toFixed(1) + 'M';
+    return (value / 1000000).toFixed(d) + 'M';
   }
   if (value >= 1000) {
-    return (value / 1000).toFixed(1) + 'K';
+    return (value / 1000).toFixed(d) + 'K';
   }
-  return value.toFixed(1);
+  return value.toFixed(d);
 }
 
 export function applyOthersThreshold(data, thresholdPercent) {
