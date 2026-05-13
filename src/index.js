@@ -64,6 +64,7 @@ function getDefaultStyles() {
     + '.ck-title { font-size: var(--ck-title-size, 18px); font-weight: var(--ck-title-weight, 600); color: var(--ck-title-color, #1E293B); line-height: 1.3; }'
     + '.ck-chart-body { display: flex; gap: 20px; flex: 1; min-height: 0; }'
     + '.ck-chart-body-column { flex-direction: column; }'
+    + '.ck-chart-body-column .ck-chart-area { min-height: 140px; }'
     + '.ck-chart-area { flex: 1; position: relative; min-width: 0; min-height: 220px; }'
     + '.ck-rtl .ck-chart-body { flex-direction: row-reverse; }'
     + '.ck-toggle { display: inline-flex; background: var(--ck-toggle-inactive-bg, #F1F5F9); border-radius: var(--ck-toggle-radius, 8px); padding: 3px; gap: 2px; }'
