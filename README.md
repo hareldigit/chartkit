@@ -29,9 +29,9 @@ ChartKit renders beautiful Donut, Pie, and Bar charts using vanilla JavaScript, 
 ## Demo
 
 <p align="center">
-  <img src="screenshots/donut-chart.svg" alt="Donut Chart" width="48%" />
+  <img src="screenshots/donut-chart.png" alt="Donut Chart" width="48%" />
   &nbsp;
-  <img src="screenshots/bar-chart.svg" alt="Bar Chart" width="48%" />
+  <img src="screenshots/bar-chart.png" alt="Bar Chart" width="48%" />
 </p>
 
 > Open `examples/index.html` in a browser to see live interactive charts.
