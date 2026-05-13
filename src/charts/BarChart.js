@@ -188,6 +188,9 @@ BarChart.prototype._animateEntry = function _animateEntry(duration, maxValue, pl
   animator.cancel();
   if (!bars || bars.length === 0) return;
 
+  self._finalizeBars();
+  return;
+
   for (var i = 0; i < bars.length; i++) {
     bars[i].rect.setAttribute('y', bars[i].baseline);
     bars[i].rect.setAttribute('height', '0');
