@@ -77,17 +77,20 @@ DonutChart.prototype._setupLegendHover = function _setupLegendHover() {
   function handler(e) {
     var detail = e.detail;
     var segments = self._segments;
+    if (!segments) return;
 
     for (var i = 0; i < segments.length; i++) {
-      if (segments[i].data.id === detail.item.id) {
+      var seg = segments[i];
+      if (!seg || !seg.data || !seg.path) continue;
+      if (seg.data.id === detail.item.id) {
         if (detail.action === 'enter') {
-          segments[i].path.setAttribute('transform', 'scale(1.08)');
-          segments[i].path.setAttribute('opacity', '0.85');
-          segments[i].path.style.filter = 'drop-shadow(0 2px 6px rgba(0,0,0,0.2))';
+          seg.path.setAttribute('transform', 'scale(1.08)');
+          seg.path.setAttribute('opacity', '0.85');
+          seg.path.style.filter = 'drop-shadow(0 2px 6px rgba(0,0,0,0.2))';
         } else {
-          segments[i].path.setAttribute('transform', 'scale(1)');
-          segments[i].path.setAttribute('opacity', '1');
-          segments[i].path.style.filter = 'none';
+          seg.path.setAttribute('transform', 'scale(1)');
+          seg.path.setAttribute('opacity', '1');
+          seg.path.style.filter = 'none';
         }
       }
     }
@@ -252,14 +255,18 @@ DonutChart.prototype._animateEntry = function _animateEntry(duration) {
   if (this._segments.length === 0) return;
 
   for (var i = 0; i < this._segments.length; i++) {
-    this._segments[i].path.setAttribute('opacity', '0');
-    this._segments[i].path.setAttribute('transform', 'rotate(-90) scale(0.6)');
+    var s = this._segments[i];
+    if (s && s.path) {
+      s.path.setAttribute('opacity', '0');
+      s.path.setAttribute('transform', 'rotate(-90) scale(0.6)');
+    }
   }
 
   animator.animateSequence(this._segments.length, duration, function (progress, index) {
-    if (index >= self._segments.length) return;
+    if (index < 0 || index >= self._segments.length) return;
 
     var seg = self._segments[index];
+    if (!seg || !seg.path) return;
     var eased = easeOutBack(progress);
 
     var rotation = -90 * (1 - eased);
