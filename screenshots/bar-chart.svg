@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+  <defs>
+    <filter id="shadow"><feDropShadow dx="0" dy="2" stdDeviation="8" flood-opacity="0.08"/></filter>
+  </defs>
+
+  <!-- Card background -->
+  <rect x="0" y="0" width="600" height="400" rx="16" fill="#FFFFFF" filter="url(#shadow)"/>
+
+  <!-- Title -->
+  <text x="30" y="36" font-family="sans-serif" font-size="16" font-weight="600" fill="#1E293B">Weekly Downloads</text>
+
+  <!-- Toggle -->
+  <rect x="452" y="20" width="118" height="32" rx="8" fill="#F1F5F9"/>
+  <rect x="452" y="20" width="59" height="32" rx="8" fill="#4F46E5"/>
+  <text x="481" y="41" font-family="sans-serif" font-size="12" font-weight="500" fill="#FFFFFF" text-anchor="middle">Amount</text>
+  <text x="537" y="41" font-family="sans-serif" font-size="12" font-weight="500" fill="#64748B" text-anchor="middle">Percent</text>
+
+  <!-- Chart area -->
+  <g transform="translate(60, 60)">
+    <!-- Y-axis -->
+    <line x1="0" y1="0" x2="0" y2="220" stroke="#E2E8F0" stroke-width="1"/>
+    <!-- X-axis -->
+    <line x1="0" y1="220" x2="480" y2="220" stroke="#E2E8F0" stroke-width="1"/>
+
+    <!-- Y-axis ticks -->
+    <line x1="-6" y1="176" x2="0" y2="176" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="-10" y="180" font-family="sans-serif" font-size="11" fill="#94A3B8" text-anchor="end">5.0K</text>
+
+    <line x1="-6" y1="132" x2="0" y2="132" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="-10" y="136" font-family="sans-serif" font-size="11" fill="#94A3B8" text-anchor="end">10.0K</text>
+
+    <line x1="-6" y1="88" x2="0" y2="88" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="-10" y="92" font-family="sans-serif" font-size="11" fill="#94A3B8" text-anchor="end">15.0K</text>
+
+    <line x1="-6" y1="44" x2="0" y2="44" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="-10" y="48" font-family="sans-serif" font-size="11" fill="#94A3B8" text-anchor="end">20.0K</text>
+
+    <line x1="-6" y1="0" x2="0" y2="0" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="-10" y="4" font-family="sans-serif" font-size="11" fill="#94A3B8" text-anchor="end">25.0K</text>
+
+    <!-- Bars -->
+    <rect x="14" y="132" width="52" height="88" rx="4" fill="#4F46E5"/>
+    <text x="40" y="240" font-family="sans-serif" font-size="11" fill="#94A3B8" text-anchor="middle">Mon</text>
+
+    <rect x="94" y="92" width="52" height="128" rx="4" fill="#7C3AED"/>
+    <text x="120" y="240" font-family="sans-serif" font-size="11" fill="#94A3B8" text-anchor="middle">Tue</text>
+
+    <rect x="174" y="109" width="52" height="111" rx="4" fill="#EC4899"/>
+    <text x="200" y="240" font-family="sans-serif" font-size="11" fill="#94A3B8" text-anchor="middle">Wed</text>
+
+    <rect x="254" y="66" width="52" height="154" rx="4" fill="#F59E0B"/>
+    <text x="280" y="240" font-family="sans-serif" font-size="11" fill="#94A3B8" text-anchor="middle">Thu</text>
+
+    <rect x="334" y="84" width="52" height="136" rx="4" fill="#10B981"/>
+    <text x="360" y="240" font-family="sans-serif" font-size="11" fill="#94A3B8" text-anchor="middle">Fri</text>
+
+    <rect x="414" y="24" width="52" height="196" rx="4" fill="#3B82F6"/>
+    <text x="440" y="240" font-family="sans-serif" font-size="11" fill="#94A3B8" text-anchor="middle">Sat</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(60, 320)">
+    <circle cx="0" cy="0" r="5" fill="#4F46E5"/>
+    <text x="14" y="4" font-family="sans-serif" font-size="13" fill="#64748B">Mon 12.5K</text>
+    <circle cx="130" cy="0" r="5" fill="#7C3AED"/>
+    <text x="144" y="4" font-family="sans-serif" font-size="13" fill="#64748B">Tue 18.2K</text>
+    <circle cx="260" cy="0" r="5" fill="#EC4899"/>
+    <text x="274" y="4" font-family="sans-serif" font-size="13" fill="#64748B">Wed 15.8K</text>
+    <circle cx="390" cy="0" r="5" fill="#F59E0B"/>
+    <text x="404" y="4" font-family="sans-serif" font-size="13" fill="#64748B">Thu 22.0K</text>
+  </g>
+</svg>
