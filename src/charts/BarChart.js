@@ -141,13 +141,13 @@ BarChart.prototype._drawBars = function _drawBars(renderer, data, plotLeft, plot
     var color = getColor(i, item.color);
     var barHeight = (item.value / maxValue) * plotHeight;
     var x = plotLeft + i * barGroupWidth + barSpacing;
-    var y = plotTop + plotHeight - 0;
+    var baseline = plotTop + plotHeight;
 
     var rect = renderer.createRect({
       x: x,
-      y: y - barHeight,
+      y: baseline,
       width: barWidth,
-      height: barHeight,
+      height: 0,
       fill: color,
       rx: barRadius,
       ry: barRadius,
@@ -157,12 +157,7 @@ BarChart.prototype._drawBars = function _drawBars(renderer, data, plotLeft, plot
       style: 'cursor: pointer; transition: opacity 0.2s;',
     });
 
-    rect._targetY = y - barHeight;
-    rect._targetHeight = barHeight;
-    rect._color = color;
-
-    var barLabelY = y + 16;
-    if (barHeight < 16) barLabelY = y - 6;
+    var barLabelY = baseline + 16;
 
     var label = renderer.createText(item.label, x + barWidth / 2, barLabelY, {
       fill: LABEL_COLOR,
@@ -176,11 +171,11 @@ BarChart.prototype._drawBars = function _drawBars(renderer, data, plotLeft, plot
       label: label,
       data: item,
       color: color,
-      targetY: y - barHeight,
+      baseline: baseline,
       targetHeight: barHeight,
     });
 
-    this._attachBarHover(rect, i, item, x, y - barHeight, barWidth, barHeight);
+    this._attachBarHover(rect, i, item, x, baseline - barHeight, barWidth, barHeight);
   }
 };
 
@@ -193,21 +188,17 @@ BarChart.prototype._animateEntry = function _animateEntry(duration, maxValue, pl
   var bars = self._bars;
   if (bars.length === 0) return;
 
-  for (var i = 0; i < bars.length; i++) {
-    var baseline = bars[i].targetY + bars[i].targetHeight;
-    bars[i].rect.setAttribute('y', baseline);
-    bars[i].rect.setAttribute('height', '0');
-  }
-
   animator.animateSequence(bars.length, duration, function (progress, index) {
-    if (index < 0 || index >= bars.length) return;
+    if (index < 0 || index >= bars.length) {
+      if (index === -1) self._finalizeBars();
+      return;
+    }
 
     var bar = bars[index];
-    var baseline = bar.targetY + bar.targetHeight;
     var currentHeight = progress * bar.targetHeight;
 
-    bar.rect.setAttribute('y', baseline - currentHeight);
-    bar.rect.setAttribute('height', currentHeight.toString());
+    bar.rect.setAttribute('y', bar.baseline - currentHeight);
+    bar.rect.setAttribute('height', Math.max(0, currentHeight).toString());
 
     if (progress > 0 && progress < 0.3) {
       bar.rect.setAttribute('fill', lightenColor(bar.color, 40));
@@ -215,6 +206,22 @@ BarChart.prototype._animateEntry = function _animateEntry(duration, maxValue, pl
       bar.rect.setAttribute('fill', bar.color);
     }
   });
+
+  setTimeout(function () {
+    self._finalizeBars();
+  }, duration + 200);
+};
+
+BarChart.prototype._finalizeBars = function _finalizeBars() {
+  if (!this._bars) return;
+  for (var i = 0; i < this._bars.length; i++) {
+    var bar = this._bars[i];
+    if (bar && bar.rect) {
+      bar.rect.setAttribute('y', bar.baseline - bar.targetHeight);
+      bar.rect.setAttribute('height', bar.targetHeight.toString());
+      bar.rect.setAttribute('fill', bar.color);
+    }
+  }
 };
 
 BarChart.prototype._attachBarHover = function _attachBarHover(rect, index, item, x, y, barWidth, barHeight) {
