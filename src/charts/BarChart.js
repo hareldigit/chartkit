@@ -142,19 +142,19 @@ BarChart.prototype._drawBars = function _drawBars(renderer, data, plotLeft, plot
     var barHeight = (item.value / maxValue) * plotHeight;
     var x = plotLeft + i * barGroupWidth + barSpacing;
     var baseline = plotTop + plotHeight;
+    var barTop = baseline - barHeight;
 
     var rect = renderer.createRect({
       x: x,
-      y: baseline,
+      y: barTop,
       width: barWidth,
-      height: 0,
+      height: barHeight,
       fill: color,
       rx: barRadius,
       ry: barRadius,
       'data-index': i,
       'data-id': item.id,
       class: 'ck-bar',
-      style: 'cursor: pointer; transition: opacity 0.2s;',
     });
 
     var barLabelY = baseline + 16;
@@ -172,44 +172,45 @@ BarChart.prototype._drawBars = function _drawBars(renderer, data, plotLeft, plot
       data: item,
       color: color,
       baseline: baseline,
+      barTop: barTop,
       targetHeight: barHeight,
     });
 
-    this._attachBarHover(rect, i, item, x, baseline - barHeight, barWidth, barHeight);
+    this._attachBarHover(rect, i, item, x, barTop, barWidth, barHeight);
   }
 };
 
 BarChart.prototype._animateEntry = function _animateEntry(duration, maxValue, plotBottom) {
   var self = this;
   var animator = this._animator;
+  var bars = this._bars;
 
   animator.cancel();
+  if (!bars || bars.length === 0) return;
 
-  var bars = self._bars;
-  if (bars.length === 0) return;
+  for (var i = 0; i < bars.length; i++) {
+    bars[i].rect.setAttribute('y', bars[i].baseline);
+    bars[i].rect.setAttribute('height', '0');
+  }
 
   animator.animateSequence(bars.length, duration, function (progress, index) {
     if (index < 0 || index >= bars.length) {
-      if (index === -1) self._finalizeBars();
+      self._finalizeBars();
       return;
     }
 
     var bar = bars[index];
-    var currentHeight = progress * bar.targetHeight;
+    var h = progress * bar.targetHeight;
 
-    bar.rect.setAttribute('y', bar.baseline - currentHeight);
-    bar.rect.setAttribute('height', Math.max(0, currentHeight).toString());
-
-    if (progress > 0 && progress < 0.3) {
-      bar.rect.setAttribute('fill', lightenColor(bar.color, 40));
-    } else if (progress >= 0.3) {
-      bar.rect.setAttribute('fill', bar.color);
-    }
+    bar.rect.setAttribute('y', bar.baseline - h);
+    bar.rect.setAttribute('height', Math.max(0, h).toString());
+    bar.rect.setAttribute('fill', progress > 0.25 ? bar.color : lightenColor(bar.color, 40));
   });
 
-  setTimeout(function () {
+  var safety = setTimeout(function () {
     self._finalizeBars();
-  }, duration + 200);
+  }, duration + 300);
+  this._animSafety = safety;
 };
 
 BarChart.prototype._finalizeBars = function _finalizeBars() {
@@ -217,11 +218,12 @@ BarChart.prototype._finalizeBars = function _finalizeBars() {
   for (var i = 0; i < this._bars.length; i++) {
     var bar = this._bars[i];
     if (bar && bar.rect) {
-      bar.rect.setAttribute('y', bar.baseline - bar.targetHeight);
+      bar.rect.setAttribute('y', bar.barTop);
       bar.rect.setAttribute('height', bar.targetHeight.toString());
       bar.rect.setAttribute('fill', bar.color);
     }
   }
+  if (this._animSafety) { clearTimeout(this._animSafety); this._animSafety = null; }
 };
 
 BarChart.prototype._attachBarHover = function _attachBarHover(rect, index, item, x, y, barWidth, barHeight) {
