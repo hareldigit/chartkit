@@ -32,7 +32,7 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  transition: opacity 0.2s, transform 0.2s, background 0.2s;
+  transition: opacity 0.2s, background 0.2s, box-shadow 0.2s;
   padding: 4px 6px;
   border-radius: 6px;
 }
@@ -43,7 +43,7 @@
 
 .ck-legend-item-active {
   background: rgba(79, 70, 229, 0.08);
-  transform: translateX(4px);
+  box-shadow: inset 3px 0 0 var(--ck-toggle-active-bg, #4F46E5);
   opacity: 1 !important;
 }
 
