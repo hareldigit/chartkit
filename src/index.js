@@ -70,7 +70,7 @@ function getDefaultStyles() {
     + '.ck-toggle-btn:hover { color: var(--ck-toggle-active-color, #FFFFFF); }'
     + '.ck-toggle-active { background: var(--ck-toggle-active-bg, #4F46E5); color: var(--ck-toggle-active-color, #FFFFFF) !important; }'
     + '.ck-legend { min-width: 140px; max-width: 200px; overflow-y: auto; }'
-    + '.ck-legend-bottom { min-width: 100%; max-width: 100%; }'
+    + '.ck-legend-bottom { width: 100%; min-width: 100%; max-width: 100%; max-height: 80px; overflow-y: auto; }'
     + '.ck-legend-list { display: flex; flex-direction: column; gap: var(--ck-legend-gap, 12px); }'
     + '.ck-legend-bottom .ck-legend-list { flex-direction: row; flex-wrap: wrap; }'
     + '.ck-legend-item { display: flex; align-items: center; gap: 8px; cursor: pointer; transition: opacity 0.2s, transform 0.2s, background 0.2s; padding: 4px 6px; border-radius: 6px; }'

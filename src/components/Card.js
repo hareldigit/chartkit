@@ -22,12 +22,16 @@ export function Card(config) {
 
 Card.prototype._build = function _build() {
   this._el.appendChild(this.header.getElement());
-  this._el.appendChild(this._chartBody);
 
-  this._chartBody.appendChild(this._chartArea);
-
-  if (this.legend) {
-    this._chartBody.appendChild(this.legend.getElement());
+  if (this.legend && this.legend._config.position === 'bottom') {
+    this._el.appendChild(this._chartArea);
+    this._el.appendChild(this.legend.getElement());
+  } else {
+    this._el.appendChild(this._chartBody);
+    this._chartBody.appendChild(this._chartArea);
+    if (this.legend) {
+      this._chartBody.appendChild(this.legend.getElement());
+    }
   }
 
   this.footer.render();
