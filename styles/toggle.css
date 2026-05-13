@@ -8,6 +8,7 @@
   border-radius: var(--ck-toggle-radius);
   padding: 3px;
   gap: 2px;
+  direction: ltr;
 }
 
 .ck-toggle-btn {
